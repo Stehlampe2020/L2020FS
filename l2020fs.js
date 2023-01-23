@@ -4,13 +4,26 @@ class L2020FS {
         
     }
     
+    /** Export the current file system as JSON
+     * 
+     * @return   JSON string that represents the current FS state.
+     */
     get json() {
         return JSON.stringify(this.#fsobject);
     }
+    /** Import a new filesystem from JSON data. Usage of this method immediately removes all previous content from the FS without warning!
+     * 
+     * @param string The JSON string to be evaluated for the new filesystem contents.
+     * @return   A copy of the newly created FS state. 
+     */
     set json(string) {
         return this.#fsobject = JSON.parse(string);
     }
     
+    /** Return the raw contents of the file at the specified location as a data: URL.
+     * 
+     * @param path The file path to be opened. 
+     */
     readfile(path) {
         // Return the contents of this file in location path
     }
