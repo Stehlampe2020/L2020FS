@@ -9,7 +9,7 @@ filesystem = {
     "Some_other_file.l2020fsprops":"data:application/json,{%22prop1%22%3A%22some%20property%20of%20the%20file%20%27Some_other_name%27%22}"
 }
 
-The special `${filename}.l2020fsprops` files are hidden and contain special properties to the file with the name before .l2020fsprops
+The special `${filename}.l2020fsprops` files are hidden and contain special properties to the file with the name before .l2020fsprops, like for example who can access them or metadata other than the type and encoding.
 */
 
 class L2020FS {
