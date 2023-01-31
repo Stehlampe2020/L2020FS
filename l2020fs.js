@@ -38,12 +38,12 @@ class L2020FS {
         return this.#fsobject = JSON.parse(string);
     }
     
-    /** Return the raw contents of the file at the specified location as a data: URL.
+    
+    // resolvePath and setPath from https://stackoverflow.com/a/43849204 (accessed 2022-01-31 12:11)
+    /** Return the raw contents of the file at the specified location
      * 
      * @param {String} path - The file path to be opened. 
      */
-    
-    // resolvePath and setPath from https://stackoverflow.com/a/43849204 (accessed 2022-01-31 12:11)
     resolvePath(object, path, defaultValue) {
         return path
             .split('/')
