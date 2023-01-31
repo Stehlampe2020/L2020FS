@@ -23,7 +23,7 @@ class L2020FS {
     }
     
     fileref(path) {
-        locationref = this.#fsobject;
+        var locationref = this.#fsobject;
         for (dir of path.split('/')) {
             if (dir) {
                 locationref = locationref[dir]; // step into the next directory
