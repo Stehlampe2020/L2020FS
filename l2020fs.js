@@ -18,10 +18,6 @@ class L2020FS {
         
     }
     
-    listdir(path) {
-        
-    }
-    
     /** Export the current file system as JSON
      * 
      * @return {String} - JSON string that represents the current FS state.
@@ -35,7 +31,13 @@ class L2020FS {
      * @return {Object} - A copy of the newly created FS state. 
      */
     set json(string) {
-        return this.#fsobject = JSON.parse(string);
+        const actualObj = JSON.parse(string);
+        return this.#fsobject = Object.keys(actualObj).reduce((accumulator, key) => {
+           if(key!=="property"){
+              accumulator[key] = actualObj[key]
+           }
+           return accumulator;
+        }, {});
     }
     
     
