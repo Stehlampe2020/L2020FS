@@ -43,32 +43,28 @@ class L2020FS {
      * @param {String} path - The file path to be opened. 
      */
     
-    // resolvePath and setPath from https://stackoverflow.com/a/43849204
+    // resolvePath and setPath from https://stackoverflow.com/a/43849204 (accessed 2022-01-31 12:11)
     resolvePath(object, path, defaultValue) {
-        path
+        return path
             .split('/')
             .reduce((o, p) => o ? o[p] : defaultValue, object)
     }
     setPath(object, path, value) {
-        path
+        return path
             .split('/')
             .reduce((o,p,i) => o[p] = path.split('/').length === ++i ? value : o[p] || {}, object)
     }
 
     readfile(path) {
-        var locationref = this.#fsobject;
-        for (var dir of path.split('/')) {
-            if (dir) {
-                locationref = locationref[dir]; // step into the next directory
-            } else {
-                // Do nothing because several slashes together should be interpreted as one.
-            }
-        }
-        return locationref;
+        while (path.includes('//')) { path = path.replace('//', '/'); } // make all multi-slashes to single slashes
+        if (path.startsWith('/')) { path = path.substr(1); } // remove the slash if existent
+        return resolvePath(this.#fsobject, path);
     }
     
     writefile(path, content) {
-        // Write content to the file on location path
+        while (path.includes('//')) { path = path.replace('//', '/'); } // make all multi-slashes to single slashes
+        if (path.startsWith('/')) { path = path.substr(1); } // remove the slash if existent
+        return setPath(this.#fsobject, path, content);
     }
     
     fileprops(path) {
