@@ -22,18 +22,6 @@ class L2020FS {
         
     }
     
-    fileref(path) {
-        var locationref = this.#fsobject;
-        for (var dir of path.split('/')) {
-            if (dir) {
-                locationref = locationref[dir]; // step into the next directory
-            } else {
-                // Do nothing because several slashes together should be interpreted as one.
-            }
-        }
-        return locationref;
-    }
-    
     /** Export the current file system as JSON
      * 
      * @return {String} - JSON string that represents the current FS state.
@@ -54,9 +42,31 @@ class L2020FS {
      * 
      * @param {String} path - The file path to be opened. 
      */
-    readfile(path) {
-        // Return the contents of this file in location path
+    
+    // resolvePath and setPath from https://stackoverflow.com/a/43849204
+    resolvePath(object, path, defaultValue) {
+        path
+            .split('/')
+            .reduce((o, p) => o ? o[p] : defaultValue, object)
     }
+    setPath(object, path, value) {
+        path
+            .split('/')
+            .reduce((o,p,i) => o[p] = path.split('/').length === ++i ? value : o[p] || {}, object)
+    }
+
+    readfile(path) {
+        var locationref = this.#fsobject;
+        for (var dir of path.split('/')) {
+            if (dir) {
+                locationref = locationref[dir]; // step into the next directory
+            } else {
+                // Do nothing because several slashes together should be interpreted as one.
+            }
+        }
+        return locationref;
+    }
+    
     writefile(path, content) {
         // Write content to the file on location path
     }
