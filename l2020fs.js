@@ -32,6 +32,7 @@ class L2020FS {
      */
     set json(string) {
         const actualObj = JSON.parse(string);
+        // Following algorithm is from https://www.tutorialspoint.com/how-to-remove-a-property-from-a-javascript-object-1 (heading 'Using the reduce() Method', accessed 2023-01-31 13:19)
         return this.#fsobject = Object.keys(actualObj).reduce((accumulator, key) => {
            if(key!=="property"){
               accumulator[key] = actualObj[key]
@@ -41,7 +42,7 @@ class L2020FS {
     }
     
     
-    // resolvePath and setPath from https://stackoverflow.com/a/43849204 (accessed 2022-01-31 12:11)
+    // resolvePath and setPath from https://stackoverflow.com/a/43849204 (accessed 2023-01-31 12:11)
     /** Return the raw contents of the file at the specified location
      * 
      * @param {String} path - The file path to be opened. 
