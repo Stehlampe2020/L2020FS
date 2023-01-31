@@ -54,6 +54,10 @@ class L2020FS {
             .split('/')
             .reduce((o,p,i) => o[p] = path.split('/').length === ++i ? value : o[p] || {}, object)
     }
+    
+    delfile(path) {
+        delete this.resolvePath(path);
+    }
 
     readfile(path) {
         while (path.includes('//')) { path = path.replace('//', '/'); } // make all multi-slashes to single slashes
