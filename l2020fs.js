@@ -18,6 +18,22 @@ class L2020FS {
         
     }
     
+    listdir(path) {
+        
+    }
+    
+    fileref(path) {
+        locationref = this.#fsobject;
+        for (dir of path.split('/')) {
+            if (dir) {
+                locationref = locationref[dir]; // step into the next directory
+            } else {
+                // Do nothing because several slashes together should be interpreted as one.
+            }
+        }
+        return locationref;
+    }
+    
     /** Export the current file system as JSON
      * 
      * @return {String} - JSON string that represents the current FS state.
