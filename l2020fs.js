@@ -58,13 +58,13 @@ class L2020FS {
     readfile(path) {
         while (path.includes('//')) { path = path.replace('//', '/'); } // make all multi-slashes to single slashes
         if (path.startsWith('/')) { path = path.substr(1); } // remove the slash if existent
-        return resolvePath(this.#fsobject, path);
+        return this.resolvePath(this.#fsobject, path);
     }
     
     writefile(path, content) {
         while (path.includes('//')) { path = path.replace('//', '/'); } // make all multi-slashes to single slashes
         if (path.startsWith('/')) { path = path.substr(1); } // remove the slash if existent
-        return setPath(this.#fsobject, path, content);
+        return this.setPath(this.#fsobject, path, content);
     }
     
     fileprops(path) {
