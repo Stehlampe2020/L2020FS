@@ -31,11 +31,10 @@ class L2020FS {
      * @return {Object} - A copy of the newly created FS state. 
      */
     set json(string) {
-        const actualObj = JSON.parse(string);
-        // Following algorithm is from https://www.tutorialspoint.com/how-to-remove-a-property-from-a-javascript-object-1 (heading 'Using the reduce() Method', accessed 2023-01-31 13:19)
-        return this.#fsobject = Object.keys(actualObj).reduce((accumulator, key) => {
-           if(key!=="property"){
-              accumulator[key] = actualObj[key]
+        const fsObj = JSON.parse(string);
+        // Remove all undefined files. Following algorithm is from https://www.tutorialspoint.com/how-to-remove-a-property-from-a-javascript-object-1 (heading 'Using the reduce() Method', accessed 2023-01-31 13:19)
+        return this.#fsobject = Object.keys(fsObj).reduce((accumulator, key) => {
+           if(key!=="property"){fsObj[key]
            }
            return accumulator;
         }, {});
