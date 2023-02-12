@@ -60,6 +60,10 @@ class L2020FS {
             .reduce((o,p,i) => o[p] = path.split('/').length === ++i ? value : o[p] || {}, object)
     }
     
+    mkdir(path) {
+        if (!this.readfile(path)) { return this.writefile(path, {}); } else { return this.readfile(path); }
+    }
+    
     delfile(path) {
         delete this.resolvePath(path);
     }
