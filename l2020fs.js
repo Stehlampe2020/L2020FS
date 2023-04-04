@@ -57,6 +57,7 @@ class L2020FS {
     setPath(object, path, value) {
         return path
             .split('/')
+            // TODO: remove ..s along with the part just before it!
             .reduce((o,p,i) => o[p] = path.split('/').length === ++i ? value : o[p] || {}, object)
     }
     
