@@ -76,14 +76,14 @@ class L2FS {
                    return {
                        path: '/'+path.substr(0,otherFSPath.length),
                        fs:   this.#otherFSs[otherFSPath]
-                   }
+                   };
                }
            }
        }
        return {
            path: path,
            fs:   this
-       }
+       };
    }
 
    mount(mountpoint, fsToMount, nodeProps) {
@@ -147,7 +147,7 @@ class L2FS {
                        owner: nodeProps?.owner||'root:root',
                        perms: nodeProps?.perms||'drwxr-xr--',
                        isDevice: (nodeProps?.isDevice===undefined)?false:nodeProps?.isDevice, // Is set to true for directories that represent another file system
-                       meta: {}, // Here goes all metadata
+                       meta: {} // Here goes all metadata
                    };
                    if (nodeProps?.isDevice) {
                        this.#otherFSs[path] = nodeProps?.accessorObject; // An object that implements the same methods as L2FS, to make it possible for L2FS to access it.
@@ -244,9 +244,9 @@ class L2FS {
            if (!perms) {
                return this.#fs[path].perms;
            }
-           const fail = (i)=>{throw new L2FSError(`L2FS: Invalid permission '${perms[i]}' on index[${i}] in perms '${perms}'!`);}
+           const fail = (i)=>{throw new L2FSError(`L2FS: Invalid permission '${perms[i]}' on index[${i}] in perms '${perms}'!`);};
            const verifiedPerms = [];
-           if (perms.length!=7) {
+           if (perms.length!==7) {
                throw new L2FSError(`L2FS: Cannot set permissions on inode '${path}': invalid perm-string length of ${perms.length} (must be 7)`);
            }
            if (['d','f','l'].includes(perms[0])) {
